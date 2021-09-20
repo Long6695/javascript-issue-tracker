@@ -67,14 +67,14 @@ function handleTrackerSubmit(e) {
 }
 
 function addTracker() {
-  const des = document.getElementById('description').value
+  const des = document.getElementById('description')
   fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      description: des,
+      description: des.value,
       id: Math.random(),
       severity: getValueSelect(),
       status: 'New',
@@ -85,8 +85,7 @@ function addTracker() {
   .catch((error) => {
     console.log('Error', error)
   })
-  
-  des.value = ''
+  des.value= ''
 }
 
 
