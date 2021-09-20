@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./main.css" />
+    <title>Issue Tracker</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="add-task">
+        <h1 class="main-title">Issue Tracker</h1>
+        <form id="form" class="form">
+          <label for="description">Description</label>
+          <input
+            id="description"
+            type="text"
+            placeholder="Describe the issue ..."
+          />
+          <label>Severity</label>
+          <select id="select">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <input type="submit" value="Add" />
+        </form>
+      </div>
+
+      <div class="option-tracker">
+        <div class="header-tracker">
+          <h2>List Tracker</h2>
+          <input type="search" placeholder="Search by description" />
+        </div>
+        <div class="filter-tracker">
+          <label>Filter:</label>
+          <div class="tracker-tags">
+            <a href="#" class="tag all-tag">All</a>
+            <a href="#" class="tag open-tag">Open</a>
+            <a href="#" class="tag close-tag">Close</a>
+          </div>
+        </div>
+        <div class="order-tracker">
+          <label>Order By:</label>
+          <select class="select-order">
+            <option value="">ASC</option>
+            <option value="">DESC</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="wrapper-list"></div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
