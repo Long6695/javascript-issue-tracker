@@ -38,7 +38,7 @@ function renderTracker(trackers) {
                 </div>
                 <div id="option-button" class="option-button">
                   <button id="close" class="btn clo-btn">Close</button>
-                  <button id="delete" class="btn del-btn" onclick ="deleteTracker(${tracker.id})">Delete</button>
+                  <button id="delete" class="btn del-btn" onclick ="deleteTracker('${tracker.id}')">Delete</button>
                 </div>
               </div>
             </div>
