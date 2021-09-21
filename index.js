@@ -1,34 +1,28 @@
-
-
 //URL API
 const url = 'https://tony-json-server.herokuapp.com/api/todos'
 
-
-function loadTracker () {
-  getTrackers((trackers)=> {
+function loadTracker() {
+  getTrackers((trackers) => {
     renderTracker(trackers)
   })
 }
 
 loadTracker()
 
+// GET API TRACKER
 
-
-
-// GET API TRACKER 
-
-function getTrackers (callback) {
+function getTrackers(callback) {
   fetch(url)
-  .then(res => res.json())
-  .then(callback)
+    .then((res) => res.json())
+    .then(callback)
 }
 
-// Render tracker 
+// Render tracker
 
-function renderTracker(trackers){
+function renderTracker(trackers) {
   const allTrackers = trackers.data
   const listTracker = document.getElementById('wrapper-list')
-  const htmls = allTrackers.map(tracker => {
+  const htmls = allTrackers.map((tracker) => {
     return `
     <div class="list-tracker">
               <div class="list-tracker-header">
@@ -40,7 +34,7 @@ function renderTracker(trackers){
               <div class="tracker-info">
                 <div class="description-info">
                   <p class="description" id="description">${tracker.description}</p>
-                  <span class="tracker-tag tag" id="tag">${tracker.severity}</span>
+                  <span class="tracker-tag ${tracker.severity}" id="tag">${tracker.severity}</span>
                 </div>
                 <div id="option-button" class="option-button">
                   <button id="close" class="btn clo-btn">Close</button>
@@ -80,14 +74,13 @@ function addTracker() {
       status: 'New',
     }),
   })
-  .then((response) => response.json())
-  .then(loadTracker)
-  .catch((error) => {
-    console.log('Error', error)
-  })
-  des.value= ''
+    .then((response) => response.json())
+    .then(loadTracker)
+    .catch((error) => {
+      console.log('Error', error)
+    })
+  des.value = ''
 }
-
 
 const formSubmit = document.getElementById('form')
 
@@ -96,12 +89,13 @@ formSubmit.addEventListener('submit', handleTrackerSubmit)
 // DELETE TRACKER
 
 function deleteTracker(id) {
+  console.log(url + '/' + id)
   fetch(url + '/' + id, {
     method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   })
-  .then(res => res.json())
-  .then(loadTracker)
+    .then((res) => res.json())
+    .then(loadTracker)
 }

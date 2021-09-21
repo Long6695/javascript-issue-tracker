@@ -254,8 +254,21 @@ a {
   margin: 0 0 0.8rem 0;
 }
 
-.description-info .tag {
+.description-info .low {
   background-color: var(--all-tag);
+  color: #fff;
+  width: 50px;
+  text-align: center;
+}
+.description-info .medium {
+  background-color: rgb(6, 80, 114);
+  color: #fff;
+  width: 50px;
+  text-align: center;
+}
+
+.description-info .high {
+  background-color: rgb(90, 12, 80);
   color: #fff;
   width: 50px;
   text-align: center;
