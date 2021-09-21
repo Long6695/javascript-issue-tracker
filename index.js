@@ -89,7 +89,6 @@ formSubmit.addEventListener('submit', handleTrackerSubmit)
 // DELETE TRACKER
 
 function deleteTracker(id) {
-  console.log(url + '/' + id)
   fetch(url + '/' + id, {
     method: 'DELETE',
     headers: {
