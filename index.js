@@ -44,7 +44,7 @@ function renderTracker(trackers) {
             </div>
     `
   })
-  listTracker.innerHTML = htmls
+  listTracker.innerHTML = htmls.join('')
 }
 
 // Add Tracker
