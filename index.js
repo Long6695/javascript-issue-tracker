@@ -3,7 +3,8 @@ const url = 'https://tony-json-server.herokuapp.com/api/todos'
 
 function loadTracker() {
   getTrackers((trackers) => {
-    renderTracker(trackers)
+    const allTrackers = trackers.data
+    renderTracker(allTrackers)
   })
 }
 
@@ -20,57 +21,69 @@ function getTrackers(callback) {
 // Render tracker
 
 function renderTracker(trackers) {
-  const allTrackers = trackers.data
   const listTracker = document.getElementById('wrapper-list')
-  const htmls = allTrackers.map((tracker) => {
+  const htmls = trackers.map((tracker) => {
     return `
-    <div class="list-tracker">
-              <div class="list-tracker-header">
-                <h3 class="tracker-code" id="tracker-id">${tracker.id}</h3>
-                <span class="tracker-tag new-tag" id="tracker-status"
-                  >${tracker.status}</span
-                >
-              </div>
-              <div class="tracker-info">
-                <div class="description-info">
-                  <p class="description" id="description">${tracker.description}</p>
-                  <span class="tracker-tag ${tracker.severity}" id="tag">${tracker.severity}</span>
-                </div>
-                <div id="option-button" class="option-button">
-                  <button id="close" class="btn clo-btn">Close</button>
-                  <button id="delete" class="btn del-btn" onclick ="deleteTracker('${tracker.id}')">Delete</button>
-                </div>
-              </div>
-            </div>
+      <div class="list-tracker">
+        <div class="list-tracker-header">
+          <h3 class="tracker-code" id="tracker-id">${tracker.id}</h3>
+          <span class="tracker-tag new-tag" id="tracker-status"
+            >${tracker.status}</span
+          >
+        </div>
+        <div class="tracker-info">
+          <div class="description-info">
+            <p class="description" id="description">${tracker.description}</p>
+            <span class="tracker-tag ${tracker.severity}" id="tag">${tracker.severity}</span>
+          </div>
+          <div id="option-button" class="option-button">
+            <button id="close" class="btn clo-btn">Close</button>
+            <button id="delete" class="btn del-btn" onclick ="deleteTracker('${tracker.id}')">Delete</button>
+          </div>
+        </div>
+      </div>
     `
   })
   listTracker.innerHTML = htmls.join('')
 }
 
 // Add Tracker
-const select = document.getElementById('select')
-const getValueSelect = () => {
-  return select.options[select.selectedIndex].value
-}
+const description = document.getElementById('description')
+const severity = document.getElementById('severity').value
+const formSubmit = document.getElementById('form')
+const errorMess = document.getElementById('error-mess')
 
-select.addEventListener('change', getValueSelect)
+function showMessageError(message) {
+  description.classList.add('error')
+  errorMess.classList.add('active')
+  errorMess.innerText = message
+  setTimeout((e) => {
+    description.classList.remove('error')
+    errorMess.classList.remove('active')
+  }, 3000)
+}
 
 function handleTrackerSubmit(e) {
   e.preventDefault()
-  addTracker()
+  if (description.value === '') {
+    showMessageError('Please Enter Your Description')
+  } else if (description.value.length < 6) {
+    showMessageError('Characters should more than 5')
+  } else {
+    addTracker()
+  }
 }
 
 function addTracker() {
-  const des = document.getElementById('description')
   fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      description: des.value,
-      id: Math.random(),
-      severity: getValueSelect(),
+      description: description.value,
+      id: Date.now(),
+      severity,
       status: 'New',
     }),
   })
@@ -79,22 +92,37 @@ function addTracker() {
     .catch((error) => {
       console.log('Error', error)
     })
-  des.value = ''
-}
 
-const formSubmit = document.getElementById('form')
+  description.value = ''
+}
 
 formSubmit.addEventListener('submit', handleTrackerSubmit)
 
 // DELETE TRACKER
 
 function deleteTracker(id) {
-  fetch(url + '/' + id, {
+  // console.log('delete: ' , id)
+  fetch(`${url}/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-  })
-    .then((res) => res.json())
-    .then(loadTracker)
+  }).then(loadTracker)
 }
+
+// SEARCH TRACKERS
+const searchBar = document.getElementById('search-tracker')
+
+const searchValue = []
+
+searchBar.addEventListener('keyup', (e) => {
+  const searchString = e.target.value
+  const filteredTrackers = getTrackers((trackers) => {
+    trackers.data.filter((tracker) => {
+      if (tracker.description.includes(searchString)) {
+        return searchValue.push(tracker)
+      }
+    })
+  })
+  return renderTracker(filteredTrackers)
+})

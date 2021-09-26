@@ -80,14 +80,64 @@ a {
   font-weight: 400;
 }
 
-.form input[type='text'],
+.form .success,
 .form select {
   width: 100%;
   padding: 1rem;
   border: 1px solid rgb(172, 172, 172);
   border-radius: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+.form .error {
+  border: 1px solid red;
 }
 
+.form .des-error {
+  color: red;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  display: inline-block;
+  width: 200px;
+  height: 25px;
+  border: 1px solid red;
+  border-radius: 1rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.form .des-error.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.form .des-error::before {
+  content: '';
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  top: -1px;
+  left: 30px;
+  transform: translateY(-50%) rotate(45deg);
+  border: 1px solid red;
+  border-bottom: none;
+  border-right: none;
+}
+
+.form .des-error::after {
+  content: '';
+  width: 18px;
+  height: 2px;
+  position: absolute;
+  top: -1px;
+  left: 28px;
+  background-color: white;
+}
 .form input[type='text']:focus,
 .form select:focus {
   outline: none;

@@ -17,9 +17,11 @@
             id="description"
             type="text"
             placeholder="Describe the issue ..."
+            class="success"
           />
+          <label id="error-mess" class="des-error"></label>
           <label>Severity</label>
-          <select id="select">
+          <select id="severity">
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
@@ -32,7 +34,7 @@
         <div class="header-tracker">
           <h2>List Tracker</h2>
           <input
-            id="search"
+            id="search-tracker"
             type="search"
             placeholder="Search by description"
           />
