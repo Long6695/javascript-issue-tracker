@@ -21,6 +21,7 @@ function getTrackers(callback) {
 // Render tracker
 
 function renderTracker(trackers) {
+  console.log(trackers)
   const listTracker = document.getElementById('wrapper-list')
   const htmls = trackers.map((tracker) => {
     return `
@@ -37,7 +38,7 @@ function renderTracker(trackers) {
             <span class="tracker-tag ${tracker.severity}" id="tag">${tracker.severity}</span>
           </div>
           <div id="option-button" class="option-button">
-            <button id="close" class="btn clo-btn">Close</button>
+            <button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">Close</button>
             <button id="delete" class="btn del-btn" onclick ="deleteTracker('${tracker.id}')">Delete</button>
           </div>
         </div>
@@ -82,7 +83,7 @@ function addTracker() {
     },
     body: JSON.stringify({
       description: description.value,
-      id: Date.now(),
+      // id: Date.now(),
       severity,
       status: 'New',
     }),
@@ -110,19 +111,38 @@ function deleteTracker(id) {
   }).then(loadTracker)
 }
 
+// Update Tracker
+getTrackers((trackers) => {
+  const dataTrackers = trackers.data
+  dataTrackers.forEach((tracker) => {
+    tracker.status.toLowerCase() === 'New' ||
+    tracker.status.toLowerCase() === 'Close'
+      ? JSON.stringify({ status: 'Open' })
+      : JSON.stringify({ status: 'Close' })
+  })
+})
+function updateTracker(id) {
+  fetch(`${url}/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: getTrackers(),
+  }).then(loadTracker)
+}
+
 // SEARCH TRACKERS
+
 const searchBar = document.getElementById('search-tracker')
 
-const searchValue = []
-
 searchBar.addEventListener('keyup', (e) => {
-  const searchString = e.target.value
-  const filteredTrackers = getTrackers((trackers) => {
-    trackers.data.filter((tracker) => {
-      if (tracker.description.includes(searchString)) {
-        return searchValue.push(tracker)
-      }
+  const searchString = e.target.value.toLowerCase()
+
+  getTrackers((trackers) => {
+    const dataTrackers = trackers.data
+    const filterTrackers = dataTrackers.filter((tracker) => {
+      return tracker.description.toLowerCase().includes(searchString)
     })
+    renderTracker(filterTrackers)
   })
-  return renderTracker(filteredTrackers)
 })
