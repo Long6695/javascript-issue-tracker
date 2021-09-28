@@ -1,5 +1,4 @@
 //URL API
-window.location.href = '../welcome/welcome.html'
 
 const url = 'https://tony-json-server.herokuapp.com/api/todos'
 
