@@ -14,7 +14,7 @@ form.addEventListener('submit', (e) => {
     addUsers()
     setTimeout(() => {
       window.location.href = './login.html'
-    }, 1000)
+    }, 1500)
   } else {
     console.log('error')
   }

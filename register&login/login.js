@@ -16,6 +16,8 @@ form.addEventListener('submit', (e) => {
     allUsers.forEach((user) => {
       if (user.email === email.value && user.password === password.value) {
         window.location.href = '../dashboard/index.html'
+      } else {
+        alert('Wrong email or password')
       }
     })
   })
