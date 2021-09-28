@@ -42,16 +42,16 @@
         <div class="filter-tracker">
           <label>Filter:</label>
           <div class="tracker-tags">
-            <a href="#" class="tag all-tag">All</a>
-            <a href="#" class="tag open-tag">Open</a>
-            <a href="#" class="tag close-tag">Close</a>
+            <button href="#" id="all" class="tag all-tag">All</button>
+            <button href="#" id="open" class="tag open-tag">Open</button>
+            <button href="#" id="close" class="tag close-tag">Close</button>
           </div>
         </div>
         <div class="order-tracker">
           <label>Order By:</label>
-          <select class="select-order">
-            <option value="">ASC</option>
-            <option value="">DESC</option>
+          <select id="order-by" class="select-order">
+            <option value="asc" id="asc">ASC</option>
+            <option value="desc" id="desc">DESC</option>
           </select>
         </div>
       </div>

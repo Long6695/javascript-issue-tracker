@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  color: #000;
+  font-size: 1.6rem;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #abe9cd;
+  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+}
+a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 2.7rem;
+}
+.container {
+  width: 400px;
+  height: 630px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: rgba(46, 195, 240, 0.4) -5px 5px,
+    rgba(46, 185, 240, 0.3) -10px 10px, rgba(46, 146, 240, 0.2) -15px 15px,
+    rgba(46, 82, 240, 0.1) -20px 20px, rgba(82, 46, 240, 0.05) -25px 25px;
+}
+
+.register {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.register .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register h1 {
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.register span {
+  width: 140px;
+  height: 3px;
+  background-color: #7cffcb;
+  background-image: linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%);
+  position: absolute;
+  top: 55px;
+  right: 100px;
+}
+.register form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  align-items: flex-start;
+}
+
+form label,
+form input {
+  display: block;
+  width: 100%;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #fff;
+  margin-top: 1.4rem;
+}
+
+form input {
+  padding: 0.7rem;
+  border: 1px solid rgb(172, 172, 172);
+  border-radius: 0.7rem;
+  color: #333;
+}
+
+form input.success {
+  border: 1px solid rgb(0, 255, 64);
+}
+form input.error {
+  border: 1px solid red;
+}
+
+form input[type='submit'] {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 2rem 0;
+  background-color: #2092bf;
+  color: #fff;
+  margin-top: 2rem;
+}
+
+form input[type='submit']:hover {
+  background-color: #7cb5ff;
+}
+
+form input:focus {
+  outline: none;
+  border: 1px solid #3db2ff;
+  box-shadow: 0 0 5px #3db2ff;
+}
+
+form .des-error {
+  font-size: 1.4rem;
+  display: inline-block;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  margin-top: 0;
+}
+
+form .des-error.error {
+  color: rgb(197, 9, 9);
+  padding-left: 1rem;
+  visibility: visible;
+  opacity: 1;
+}
+
+form .des-error.success {
+  color: rgb(0, 255, 64);
+  padding-left: 1rem;
+  visibility: visible;
+  opacity: 1;
+}

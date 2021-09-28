@@ -21,7 +21,6 @@ function getTrackers(callback) {
 // Render tracker
 
 function renderTracker(trackers) {
-  console.log(trackers)
   const listTracker = document.getElementById('wrapper-list')
   const htmls = trackers.map((tracker) => {
     return `
@@ -50,9 +49,14 @@ function renderTracker(trackers) {
 
 // Add Tracker
 const description = document.getElementById('description')
-const severity = document.getElementById('severity').value
+const severity = document.getElementById('severity')
 const formSubmit = document.getElementById('form')
 const errorMess = document.getElementById('error-mess')
+
+function handleChangeValue() {
+  return severity.value
+}
+severity.addEventListener('change', handleChangeValue)
 
 function showMessageError(message) {
   description.classList.add('error')
@@ -84,7 +88,7 @@ function addTracker() {
     body: JSON.stringify({
       description: description.value,
       // id: Date.now(),
-      severity,
+      severity: handleChangeValue(),
       status: 'New',
     }),
   })
@@ -145,4 +149,80 @@ searchBar.addEventListener('keyup', (e) => {
     })
     renderTracker(filterTrackers)
   })
+})
+
+// Filter Trackers
+
+const allFilter = document.getElementById('all')
+const openFilter = document.getElementById('open')
+const closeFilter = document.getElementById('close')
+
+function filterString(trackers, string) {
+  const dataTrackers = trackers.data
+  const check = dataTrackers.filter((tracker) => {
+    return tracker.status === string
+  })
+  return renderTracker(check)
+}
+
+allFilter.addEventListener('click', (e) => {
+  loadTracker()
+})
+
+openFilter.addEventListener('click', (e) => {
+  getTrackers((trackers) => {
+    filterString(trackers, 'Open')
+  })
+})
+
+closeFilter.addEventListener('click', (e) => {
+  getTrackers((trackers) => {
+    filterString(trackers, 'Close')
+  })
+})
+
+// ORDER BY
+
+const orderBy = document.getElementById('order-by')
+
+//Order ASC
+function orderByAsc(trackers) {
+  const allTrackers = trackers.data
+  return allTrackers.sort((a, b) => {
+    if (a.description < b.description) {
+      return -1
+    }
+  })
+}
+
+//Order DESC
+function orderByDesc(trackers) {
+  const allTrackers = trackers.data
+  return allTrackers.sort((a, b) => {
+    if (a.description > b.description) {
+      return -1
+    }
+  })
+}
+
+function defaultOrderAsc() {
+  orderBy.value === 'asc'
+  getTrackers((trackers) => {
+    renderTracker(orderByAsc(trackers))
+  })
+}
+
+defaultOrderAsc()
+
+orderBy.addEventListener('change', () => {
+  if (orderBy.value === 'asc') {
+    getTrackers((trackers) => {
+      renderTracker(orderByAsc(trackers))
+    })
+  }
+  if (orderBy.value === 'desc') {
+    getTrackers((trackers) => {
+      renderTracker(orderByDesc(trackers))
+    })
+  }
 })

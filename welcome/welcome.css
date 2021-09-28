@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  color: #000;
+  font-size: 1.6rem;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #abe9cd;
+  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 400px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: rgba(46, 195, 240, 0.4) -5px 5px,
+    rgba(46, 185, 240, 0.3) -10px 10px, rgba(46, 146, 240, 0.2) -15px 15px,
+    rgba(46, 82, 240, 0.1) -20px 20px, rgba(82, 46, 240, 0.05) -25px 25px;
+}
+
+.welcome {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+.welcome h1 {
+  font-size: 5rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.welcome p {
+  line-height: 1.4;
+  color: #333;
+}
+.welcome .option {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.option a {
+  display: inline-block;
+  padding: 1.5rem 2rem;
+  font-size: 1.8rem;
+  color: #fff;
+  border-radius: 1rem;
+}
+
+.option .register {
+  color: #333;
+  background-color: #fff;
+}
+
+.option .login {
+  background-color: #5de6de;
+  background-image: linear-gradient(315deg, #5de6de 0%, #b58ecc 74%);
+}
