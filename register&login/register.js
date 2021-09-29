@@ -50,10 +50,6 @@ function addUsers() {
       password: password.value,
     }),
   }).then((response) => response.json())
-  firstName.value = ''
-  lastName.value = ''
-  email.value = ''
-  password.value = ''
 }
 function checkInputs() {
   const firstNameLabel = document.querySelector('label[value="First Name"]')
