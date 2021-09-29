@@ -12,9 +12,9 @@ form.addEventListener('submit', (e) => {
   checkInputs()
   if (checkErrorExist()) {
     addUsers()
-    // setTimeout(() => {
-    //   window.location.href = './login.html'
-    // }, 1500)
+    setTimeout(() => {
+      window.location.href = './login.html'
+    }, 1500)
   } else {
     console.log('error')
   }
