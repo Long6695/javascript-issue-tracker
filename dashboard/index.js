@@ -117,23 +117,27 @@ function deleteTracker(id) {
 }
 
 // Update Tracker
-getTrackers((trackers) => {
-  const dataTrackers = trackers.data
-  dataTrackers.forEach((tracker) => {
-    tracker.status.toLowerCase() === 'New' ||
-    tracker.status.toLowerCase() === 'Close'
-      ? JSON.stringify({ status: 'Open' })
-      : JSON.stringify({ status: 'Close' })
-  })
-})
 function updateTracker(id) {
-  fetch(`${url}/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: getTrackers(),
-  }).then(loadTracker)
+  fetch(`${url}/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      data.data.status.toLowerCase() === 'new' ||
+      data.data.status.toLowerCase() === 'close'
+        ? fetch(`${url}/${id}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: 'Open' }),
+          }).then(loadTracker)
+        : fetch(`${url}/${id}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: 'Close' }),
+          }).then(loadTracker)
+    })
 }
 
 // SEARCH TRACKERS

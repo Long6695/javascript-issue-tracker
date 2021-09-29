@@ -12,9 +12,9 @@ form.addEventListener('submit', (e) => {
   checkInputs()
   if (checkErrorExist()) {
     addUsers()
-    setTimeout(() => {
-      window.location.href = './login.html'
-    }, 1500)
+    // setTimeout(() => {
+    //   window.location.href = './login.html'
+    // }, 1500)
   } else {
     console.log('error')
   }
@@ -78,25 +78,25 @@ function checkInputs() {
     showError(emailLabel, 'Email cannot empty', email)
   } else if (!isEmail(email.value)) {
     showError(emailLabel, 'Email not valid', email)
-  } else {
-    // Check email exist
-    getUsers((data) => {
-      const users = data.data
-      users.forEach((user) => {
-        if (user.email === email.value) {
-          showError(emailLabel, 'Email already exist', email)
-        }
-      })
-    })
-    // Check email not registered
+  }
+  // } else if (isEmail(email.value)) {
+  //   // Check email exist
+  //   getUsers((data) => {
+  //     const users = data.data
+  //     users.forEach((user) => {
+  //       if (user.email === email.value) {
+  //         showError(emailLabel, 'Email already exist', email)
+  //       }
+  //     })
+  //   })
+  // }
+  else {
     showSuccess(emailLabel, 'Correct', email)
   }
 
   // Check Password
-  if (password.value === '') {
+  if (password.value === '' || password.value.length < 6) {
     showError(passLabel, 'Password cannot empty', password)
-  } else if (password.value.length < 6) {
-    showError(passLabel, 'Password too short', password)
   } else {
     showSuccess(passLabel, 'Correct', password)
   }
