@@ -7,14 +7,19 @@ const password = document.getElementById('password')
 const confirmPass = document.getElementById('password2')
 const allLabelError = document.querySelectorAll('label[class="des-error"]')
 
+const firstNameLabel = document.querySelector('label[value="First Name"]')
+const lastNameLabel = document.querySelector('label[value="Last Name"]')
+const emailLabel = document.querySelector('label[value="Email"]')
+const passLabel = document.querySelector('label[value="PassWord"]')
+const confirmPassLabel = document.querySelector(
+  'label[value="ConFirm PassWord"]'
+)
+
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   checkInputs()
   if (checkErrorExist()) {
     addUsers()
-    setTimeout(() => {
-      window.location.href = './login.html'
-    }, 1500)
   } else {
     console.log('error')
   }
@@ -38,27 +43,32 @@ function getUsers(cb) {
 
 //POST API
 function addUsers() {
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      firstName: firstName.value,
-      lastName: lastName.value,
-      email: email.value,
-      password: password.value,
-    }),
-  }).then((response) => response.json())
+  getUsers((data) => {
+    const users = data.data;
+    const isUserExisted = users.some(user => user.email === email.value);
+    if(isUserExisted) {
+      showError(emailLabel, 'Email already exist', email);
+      return;
+    }
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        password: password.value,
+      }),
+    })
+    .then(() => window.location.href = './login.html')
+    .catch(error => console.log('error register: ', error))
+  })
 }
+
 function checkInputs() {
-  const firstNameLabel = document.querySelector('label[value="First Name"]')
-  const lastNameLabel = document.querySelector('label[value="Last Name"]')
-  const emailLabel = document.querySelector('label[value="Email"]')
-  const passLabel = document.querySelector('label[value="PassWord"]')
-  const confirmPassLabel = document.querySelector(
-    'label[value="ConFirm PassWord"]'
-  )
+  
   // Check First Name
   if (firstName.value === '') {
     showError(firstNameLabel, 'First Name cannot empty', firstName)
@@ -74,25 +84,13 @@ function checkInputs() {
   }
 
   // Check Email
-  if (email.value === '') {
+  if(email.value === '') {
     showError(emailLabel, 'Email cannot empty', email)
-  } else if (!isEmail(email.value)) {
-    showError(emailLabel, 'Email not valid', email)
   }
-  // } else if (isEmail(email.value)) {
-  //   // Check email exist
-  //   getUsers((data) => {
-  //     const users = data.data
-  //     users.forEach((user) => {
-  //       if (user.email === email.value) {
-  //         showError(emailLabel, 'Email already exist', email)
-  //       }
-  //     })
-  //   })
-  // }
-  else {
-    showSuccess(emailLabel, 'Correct', email)
+  if (!isEmail(email.value)) {
+    showError(emailLabel, 'Email not valid', email);
   }
+  showSuccess(emailLabel, 'Correct', email)
 
   // Check Password
   if (password.value === '' || password.value.length < 6) {
