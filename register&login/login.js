@@ -15,8 +15,13 @@ form.addEventListener('submit', (e) => {
     const allData = data.data
     allData.forEach((user) => {
       if (user.email === email.value && user.password === password.value) {
+        localStorage.setItem('user', email.value)
         window.location.href = '../dashboard/index.html'
       }
     })
   })
 })
+
+if (localStorage.getItem('user') !== null) {
+  window.location.href = '../dashboard/index.html'
+}
