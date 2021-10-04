@@ -1,10 +1,11 @@
 //URL API
 
 const url = 'https://tony-json-server.herokuapp.com/api/todos'
+let allTrackers = []
 
 function loadTracker() {
   getTrackers((trackers) => {
-    const allTrackers = trackers.data
+    allTrackers = trackers.data
     renderTracker(allTrackers)
   })
 }
@@ -35,11 +36,36 @@ function renderTracker(trackers) {
         <div class="tracker-info">
           <div class="description-info">
             <p class="description" id="description">${tracker.description}</p>
-            <span class="tracker-tag ${tracker.severity}" id="tag">${tracker.severity}</span>
+            <span class="tracker-tag ${tracker.severity}" id="tag">${
+      tracker.severity
+    }</span>
           </div>
           <div id="option-button" class="option-button">
-            <button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">Close</button>
-            <button id="delete" class="btn del-btn" onclick ="deleteTracker('${tracker.id}')">Delete</button>
+            ${
+              tracker.status === 'New' || tracker.status === 'Open'
+                ? `<button
+                  id="close"
+                  class="btn clo-btn"
+                  onclick="updateTracker('${tracker.id}')"
+                >
+                  Open
+                </button>`
+                : `<button
+                  id="close"
+                  class="btn clo-btn "
+                  onclick="updateTracker('${tracker.id}')"
+                >
+                  Close
+                </button>`
+            }
+            
+
+
+
+
+            <button id="delete" class="btn del-btn" onclick ="deleteTracker('${
+              tracker.id
+            }')">Delete</button>
           </div>
         </div>
       </div>
@@ -231,3 +257,21 @@ orderBy.addEventListener('change', () => {
     })
   }
 })
+
+// Logout
+const logoutBtn = document.getElementById('logout-btn')
+
+logoutBtn.addEventListener('click', (e) => {
+  localStorage.removeItem('user')
+  window.location.href = '../register&login/login.html'
+})
+
+// keep user in dashboard if localStorage have email
+
+const userEmail = localStorage.getItem('user')
+if (userEmail !== null) {
+  // window.location.href = './index.html'
+  console.log('hello')
+} else {
+  window.location.href = '../register&login/register.html'
+}
