@@ -1,15 +1,12 @@
 //URL API
-
+let dataTrackers = []
 const url = 'https://tony-json-server.herokuapp.com/api/todos'
-
 function loadTracker() {
   getTrackers((trackers) => {
     const allTrackers = trackers.data
     renderTracker(allTrackers)
   })
 }
-
-loadTracker()
 
 // GET API TRACKER
 
@@ -22,10 +19,11 @@ function getTrackers(callback) {
 // Render tracker
 
 function renderTracker(trackers) {
+  dataTrackers = trackers
   const listTracker = document.getElementById('wrapper-list')
   const htmls = trackers.map((tracker) => {
     return `
-      <div class="list-tracker">
+      <div class="list-tracker" id="${tracker.id}">
         <div class="list-tracker-header">
           <h3 class="tracker-code" id="tracker-id">${tracker.id}</h3>
           <span class="tracker-tag new-tag" id="tracker-status"
@@ -35,11 +33,25 @@ function renderTracker(trackers) {
         <div class="tracker-info">
           <div class="description-info">
             <p class="description" id="description">${tracker.description}</p>
-            <span class="tracker-tag ${tracker.severity}" id="tag">${tracker.severity}</span>
+            <span class="tracker-tag ${tracker.severity}" id="tag">${
+      tracker.severity
+    }</span>
           </div>
           <div id="option-button" class="option-button">
-            <button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">Close</button>
-            <button id="delete" class="btn del-btn" onclick ="deleteTracker('${tracker.id}')">Delete</button>
+            
+           ${
+             tracker.status === 'Close'
+               ? `<button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">
+                    Open
+                  </button>`
+               : `<button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">
+                    Close
+                  </button>`
+           }
+
+            <button id="delete" class="btn del-btn" onclick ="deleteTracker('${
+              tracker.id
+            }')">Delete</button>
           </div>
         </div>
       </div>
@@ -88,7 +100,7 @@ function addTracker() {
     },
     body: JSON.stringify({
       description: description.value,
-      // id: Date.now(),
+      id: Date.now(),
       severity: handleChangeValue(),
       status: 'New',
     }),
@@ -113,7 +125,12 @@ function deleteTracker(id) {
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then(loadTracker)
+  }).then(() => {
+    const removeTracker = document.getElementById(`${id}`)
+    if (removeTracker) {
+      removeTracker.remove()
+    }
+  })
 }
 
 // Update Tracker
