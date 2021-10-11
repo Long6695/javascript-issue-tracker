@@ -1,16 +1,12 @@
 //URL API
-let dataTrackers = []
 const url = 'https://tony-json-server.herokuapp.com/api/todos'
-
-let allTrackers = []
 
 function loadTracker() {
   getTrackers((trackers) => {
-    allTrackers = trackers.data
+    let allTrackers = trackers.data
     renderTracker(allTrackers)
   })
 }
-
 // GET API TRACKER
 
 function getTrackers(callback) {
@@ -20,51 +16,49 @@ function getTrackers(callback) {
 }
 
 // Render tracker
+function root(tracker) {
+  return `<div class="list-tracker" id="${tracker.id}">
+  <div class="list-tracker-header">
+    <h3 class="tracker-code" id="tracker-id">${tracker.id}</h3>
+    <span class="tracker-tag new-tag" id="tracker-status"
+      >${tracker.status}</span
+    >
+  </div>
+  <div class="tracker-info">
+    <div class="description-info">
+      <p class="description" id="description">${tracker.description}</p>
+      <span class="tracker-tag ${tracker.severity}" id="tag">${
+    tracker.severity
+  }</span>
+    </div>
+    <div id="option-button" class="option-button">
+  
+      
+     ${
+       tracker.status === 'Close'
+         ? `<button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">
+              Open
+            </button>`
+         : `<button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">
+              Close
+            </button>`
+     }
+  
+  
+  
+  
+  
+      <button id="delete" class="btn del-btn" onclick ="deleteTracker('${
+        tracker.id
+      }')">Delete</button>
+    </div>
+  </div>
+  </div>`
+}
 
 function renderTracker(trackers) {
-  dataTrackers = trackers
   const listTracker = document.getElementById('wrapper-list')
-  const htmls = trackers.map((tracker) => {
-    return `
-      <div class="list-tracker" id="${tracker.id}">
-        <div class="list-tracker-header">
-          <h3 class="tracker-code" id="tracker-id">${tracker.id}</h3>
-          <span class="tracker-tag new-tag" id="tracker-status"
-            >${tracker.status}</span
-          >
-        </div>
-        <div class="tracker-info">
-          <div class="description-info">
-            <p class="description" id="description">${tracker.description}</p>
-            <span class="tracker-tag ${tracker.severity}" id="tag">${
-      tracker.severity
-    }</span>
-          </div>
-          <div id="option-button" class="option-button">
-
-            
-           ${
-             tracker.status === 'Close'
-               ? `<button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">
-                    Open
-                  </button>`
-               : `<button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">
-                    Close
-                  </button>`
-           }
-
-
-
-
-
-            <button id="delete" class="btn del-btn" onclick ="deleteTracker('${
-              tracker.id
-            }')">Delete</button>
-          </div>
-        </div>
-      </div>
-    `
-  })
+  const htmls = trackers.map((tracker) => root(tracker))
   listTracker.innerHTML = htmls.join('')
 }
 
@@ -91,12 +85,18 @@ function showMessageError(message) {
 
 function handleTrackerSubmit(e) {
   e.preventDefault()
+
   if (description.value === '') {
     showMessageError('Please Enter Your Description')
   } else if (description.value.length < 6) {
     showMessageError('Characters should more than 5')
   } else {
+    const addMessage = document.querySelector('.add')
     addTracker()
+    addMessage.classList.add('active')
+    setTimeout(() => {
+      addMessage.classList.remove('active')
+    }, 3000)
   }
 }
 
@@ -113,7 +113,7 @@ function addTracker() {
       status: 'New',
     }),
   })
-    .then((response) => response.json())
+    .then((res) => res.json())
     .then(loadTracker)
     .catch((error) => {
       console.log('Error', error)
@@ -137,6 +137,11 @@ function deleteTracker(id) {
     const removeTracker = document.getElementById(`${id}`)
     if (removeTracker) {
       removeTracker.remove()
+      const deleteMessage = document.querySelector('.delete')
+      deleteMessage.classList.add('active')
+      setTimeout(() => {
+        deleteMessage.classList.remove('active')
+      }, 3000)
     }
   })
 }
@@ -169,17 +174,31 @@ function updateTracker(id) {
 
 const searchBar = document.getElementById('search-tracker')
 
-searchBar.addEventListener('keyup', (e) => {
-  const searchString = e.target.value.toLowerCase()
+function onInput(e) {
+  const str = e.target.value
+  getTrackers((data) => {
+    const allData = data.data
 
-  getTrackers((trackers) => {
-    const dataTrackers = trackers.data
-    const filterTrackers = dataTrackers.filter((tracker) => {
-      return tracker.description.toLowerCase().includes(searchString)
-    })
+    const filterTrackers = allData.filter((element) =>
+      element.description.toLowerCase().includes(str)
+    )
+
     renderTracker(filterTrackers)
   })
-})
+}
+
+function debounce(func) {
+  let timer
+  return (...args) => {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      func.apply(null, args)
+    }, 500)
+  }
+}
+searchBar.addEventListener('keyup', debounce(onInput))
 
 // Filter Trackers
 
@@ -268,9 +287,6 @@ logoutBtn.addEventListener('click', (e) => {
 // keep user in dashboard if localStorage have email
 
 const userEmail = localStorage.getItem('user')
-if (userEmail !== null) {
-  // window.location.href = './index.html'
-  console.log('hello')
-} else {
-  window.location.href = '../register&login/register.html'
+if (userEmail === null) {
+  window.location.href = '../register&login/login.html'
 }
