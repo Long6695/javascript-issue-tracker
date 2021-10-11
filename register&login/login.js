@@ -1,6 +1,7 @@
 const url = 'https://tony-json-server.herokuapp.com/api/users'
 const form = document.getElementById('form')
 const email = document.getElementById('email')
+
 const password = document.getElementById('password')
 const emailLabel = document.querySelector('label[value="Email"]')
 const passLabel = document.querySelector('label[value="PassWord"]')
@@ -18,8 +19,9 @@ function getUsers() {
 }
 getUsers()
 statusMessage.classList.add('active')
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
+
+
+
 
   if (users) {
     const checkUser = users.filter((user) => {
@@ -58,6 +60,17 @@ form.addEventListener('submit', (e) => {
       showError(emailLabel, 'Email chưa đăng kí', email)
     }
   }
+
+  e.preventDefault()
+  users.forEach((user) => {
+    if (user.email === email.value && user.password === password.value) {
+      localStorage.setItem('user', email.value)
+      window.location.href = '../dashboard/index.html'
+     
+    }
+  })
+  
+ 
 })
 
 function showError(label, message, input) {
@@ -71,3 +84,5 @@ function showSuccess(label, message, input) {
   label.innerText = message
   input.className = 'success'
 }
+
+
