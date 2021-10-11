@@ -5,6 +5,7 @@ const lastName = document.getElementById('lastname')
 const email = document.getElementById('email')
 const password = document.getElementById('password')
 const confirmPass = document.getElementById('password2')
+const isLoading = document.querySelector('.loading')
 const allLabelError = document.querySelectorAll('label[class="des-error"]')
 
 const firstNameLabel = document.querySelector('label[value="First Name"]')
@@ -18,10 +19,15 @@ const confirmPassLabel = document.querySelector(
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   checkInputs()
+  isLoading.classList.add('active')
   if (checkErrorExist()) {
-    addUsers()
+    setTimeout(() => {
+      addUsers()
+    }, 1000)
   } else {
-    console.log('error')
+    isLoading.classList.remove('active')
+
+    console.log('wrong')
   }
 })
 // Check before add API Users
@@ -44,11 +50,11 @@ function getUsers(cb) {
 //POST API
 function addUsers() {
   getUsers((data) => {
-    const users = data.data;
-    const isUserExisted = users.some(user => user.email === email.value);
-    if(isUserExisted) {
-      showError(emailLabel, 'Email already exist', email);
-      return;
+    const users = data.data
+    const isUserExisted = users.some((user) => user.email === email.value)
+    if (isUserExisted) {
+      showError(emailLabel, 'Email already exist', email)
+      return
     }
     fetch(url, {
       method: 'POST',
@@ -62,13 +68,12 @@ function addUsers() {
         password: password.value,
       }),
     })
-    .then(() => window.location.href = './login.html')
-    .catch(error => console.log('error register: ', error))
+      .then(() => (window.location.href = './login.html'))
+      .catch((error) => console.log('error register: ', error))
   })
 }
 
 function checkInputs() {
-  
   // Check First Name
   if (firstName.value === '') {
     showError(firstNameLabel, 'First Name cannot empty', firstName)
@@ -84,13 +89,13 @@ function checkInputs() {
   }
 
   // Check Email
-  if(email.value === '') {
+  if (email.value === '') {
     showError(emailLabel, 'Email cannot empty', email)
+  } else if (!isEmail(email.value)) {
+    showError(emailLabel, 'Email not valid', email)
+  } else {
+    showSuccess(emailLabel, 'Correct', email)
   }
-  if (!isEmail(email.value)) {
-    showError(emailLabel, 'Email not valid', email);
-  }
-  showSuccess(emailLabel, 'Correct', email)
 
   // Check Password
   if (password.value === '' || password.value.length < 6) {

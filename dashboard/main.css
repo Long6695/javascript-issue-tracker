@@ -379,3 +379,83 @@ a {
 .option-button .del-btn:hover {
   background-color: #fd5783;
 }
+
+.status-login {
+  background-color: #09dbd8;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 20px;
+  animation: status 3s ease-in-out forwards;
+}
+
+.status-login .status {
+  color: #0922af;
+}
+
+@keyframes status {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+.add {
+  visibility: hidden;
+}
+.add.active {
+  background-color: #075cdb;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 20px;
+  animation: add 3s ease-in-out forwards;
+  visibility: visible;
+}
+
+.add.active .add-status {
+  color: rgb(245, 245, 245);
+}
+
+@keyframes add {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+.delete {
+  display: none;
+}
+.delete.active {
+  position: fixed;
+  left: 50%;
+  top: 25%;
+  width: 100%;
+  transform: translate(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  animation: delete 3s ease-in-out forwards;
+  visibility: visible;
+  background: var(--delete-btn);
+  width: 200px;
+  height: 50px;
+}
+
+.delete.active .delete-status {
+  color: rgb(245, 245, 245);
+}
+
+@keyframes delete {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
