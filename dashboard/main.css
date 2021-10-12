@@ -412,13 +412,13 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
   border-radius: 20px;
   animation: add 3s ease-in-out forwards;
   visibility: visible;
   position: fixed;
   left: 50%;
   top: 25%;
+  transform: translate(-50%, -50%);
 }
 
 .add.active .add-status {
