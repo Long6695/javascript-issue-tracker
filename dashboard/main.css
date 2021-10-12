@@ -416,6 +416,9 @@ a {
   border-radius: 20px;
   animation: add 3s ease-in-out forwards;
   visibility: visible;
+  position: fixed;
+  left: 50%;
+  top: 25%;
 }
 
 .add.active .add-status {
