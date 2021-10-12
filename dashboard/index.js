@@ -1,12 +1,13 @@
 //URL API
 const url = 'https://tony-json-server.herokuapp.com/api/todos'
-
+let allTrackers = []
 function loadTracker() {
   getTrackers((trackers) => {
-    let allTrackers = trackers.data
+    allTrackers = trackers.data
     renderTracker(allTrackers)
   })
 }
+loadTracker()
 // GET API TRACKER
 
 function getTrackers(callback) {
@@ -34,15 +35,16 @@ function root(tracker) {
     <div id="option-button" class="option-button">
   
       
-     ${
-       tracker.status === 'Close'
-         ? `<button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">
-              Open
-            </button>`
-         : `<button id="close" class="btn clo-btn" onclick="updateTracker('${tracker.id}')">
-              Close
-            </button>`
-     }
+     
+    <button id="close" class="btn clo-btn" onclick="updateTracker('${
+      tracker.id
+    }', '${tracker.status}')">
+      ${
+        tracker.status === 'New' || tracker.status === 'Open' ? 'Close' : 'Open'
+      }
+    
+    </ button>
+         
   
   
   
@@ -147,27 +149,17 @@ function deleteTracker(id) {
 }
 
 // Update Tracker
-function updateTracker(id) {
-  fetch(`${url}/${id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      data.data.status.toLowerCase() === 'new' ||
-      data.data.status.toLowerCase() === 'close'
-        ? fetch(`${url}/${id}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ status: 'Open' }),
-          }).then(loadTracker)
-        : fetch(`${url}/${id}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ status: 'Close' }),
-          }).then(loadTracker)
-    })
+
+function updateTracker(id, stt) {
+  const status = stt === 'New' || stt === 'Open' ? 'Close' : 'Open'
+
+  fetch(`${url}/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ status: status }),
+  }).then(loadTracker)
 }
 
 // SEARCH TRACKERS
