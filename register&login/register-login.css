@@ -19,8 +19,10 @@ body {
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #abe9cd;
-  background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+  width: 100vw;
+  position: relative;
+  background: #50a3a2;
+  overflow: hidden;
 }
 a {
   text-decoration: none;
@@ -33,11 +35,10 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   padding: 2rem 3rem;
   border-radius: 1rem;
-  box-shadow: rgba(46, 195, 240, 0.4) -5px 5px,
-    rgba(46, 185, 240, 0.3) -10px 10px, rgba(46, 146, 240, 0.2) -15px 15px,
-    rgba(46, 82, 240, 0.1) -20px 20px, rgba(82, 46, 240, 0.05) -25px 25px;
+  position: absolute;
 }
 
 .register {
@@ -47,29 +48,41 @@ a {
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 2;
 }
 
 .register .header {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  width: 200px;
+  margin-bottom: 30px;
+  position: relative;
+  transition: 0.3s all ease-in-out;
+}
+.register .header:hover .icon {
+  position: absolute;
+  left: 0;
+  font-size: 16px;
 }
 
-.register h1 {
+.register .header:hover .login {
+  color: #53e3a6;
+}
+
+.register .icon {
+  display: block;
+  font-size: 16px;
+}
+.register .login {
   color: #fff;
   font-weight: 700;
   text-transform: uppercase;
+  text-align: center;
+  font-size: 30px;
 }
 
-.register span {
-  width: 140px;
-  height: 3px;
-  background-color: #7cffcb;
-  background-image: linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%);
-  position: absolute;
-  top: 55px;
-  right: 100px;
-}
 .register form {
   width: 100%;
   height: auto;
@@ -77,78 +90,88 @@ a {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  align-items: flex-start;
+  align-items: center;
+  z-index: 2;
 }
-
-form label,
-form input {
-  display: block;
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
   width: 100%;
-  font-size: 1.6rem;
-  font-weight: 400;
+}
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-group .form-input {
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid rgb(216, 216, 216);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+  margin: 10px;
+}
+.form-group .form-input::placeholder {
   color: #fff;
-  margin-top: 1.4rem;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-form input {
-  padding: 0.7rem;
-  border: 1px solid rgb(172, 172, 172);
-  border-radius: 0.7rem;
-  color: #333;
+.form-group .form-input:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.form-group .form-input:focus {
+  width: 120%;
+  background: white;
+  color: #53e3a6;
+}
+.form-group .message {
+  font-size: 14px;
+  text-align: left;
+  display: none;
+}
+.form-group.success .form-input {
+  border: 1px solid rgb(7, 69, 241);
 }
 
-form input.success {
-  border: 1px solid rgb(0, 255, 64);
-}
-form input.error {
+.form-group.error .form-input {
   border: 1px solid red;
 }
 
-form input[type='submit'] {
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin: 2rem 0;
-  background-color: #2092bf;
-  color: #fff;
-  margin-top: 2rem;
+.form-group.success .message {
+  color: rgb(7, 69, 241);
+  display: block;
 }
 
-form input[type='submit']:hover {
-  background-color: #7cb5ff;
+.form-group.error .message {
+  display: block;
+  color: red;
 }
 
-form input:focus {
+.form .submit {
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
   outline: none;
-  border: 1px solid #3db2ff;
-  box-shadow: 0 0 5px #3db2ff;
+  border: none;
+  color: #53e3a6;
+  margin-top: 20px;
+  cursor: pointer;
 }
 
-form .des-error {
-  font-size: 1.4rem;
-  display: inline-block;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  position: relative;
-  visibility: hidden;
-  opacity: 0;
-  margin-top: 0;
+.loading {
+  margin-top: 20px;
 }
-
-form .des-error.error {
-  color: rgb(197, 9, 9);
-  padding-left: 1rem;
-  visibility: visible;
-  opacity: 1;
-}
-
-form .des-error.success {
-  color: rgb(0, 255, 64);
-  padding-left: 1rem;
-  visibility: visible;
-  opacity: 1;
-}
-
 .loading i {
   animation: spin 1s ease-in infinite;
   transform: rotate(0deg);
@@ -175,6 +198,8 @@ form .des-error.success {
   margin: 0 auto;
   border-radius: 20px;
   animation: status 4s ease-in-out forwards;
+  position: absolute;
+  top: 20%;
 }
 
 .status-login.active .status {
@@ -185,5 +210,112 @@ form .des-error.success {
   to {
     visibility: hidden;
     opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.bubble li {
+  position: absolute;
+  list-style: none;
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  bottom: -300px;
+  animation: square 20s infinite;
+  transition-timing-function: linear;
+}
+
+.bubble li:nth-child(1) {
+  left: 10%;
+}
+
+.bubble li:nth-child(2) {
+  left: 20%;
+
+  width: 80px;
+  height: 80px;
+
+  animation-delay: 2s;
+  animation-duration: 17s;
+}
+
+.bubble li:nth-child(3) {
+  left: 25%;
+  animation-delay: 4s;
+}
+
+.bubble li:nth-child(4) {
+  left: 40%;
+  width: 60px;
+  height: 60px;
+
+  animation-duration: 22s;
+
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.bubble li:nth-child(5) {
+  left: 70%;
+}
+
+.bubble li:nth-child(6) {
+  left: 80%;
+  width: 120px;
+  height: 120px;
+
+  animation-delay: 3s;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.bubble li:nth-child(7) {
+  left: 32%;
+  width: 160px;
+  height: 160px;
+
+  animation-delay: 7s;
+}
+
+.bubble li:nth-child(8) {
+  left: 55%;
+  width: 20px;
+  height: 20px;
+
+  animation-delay: 15s;
+  animation-duration: 40s;
+}
+
+.bubble li:nth-child(9) {
+  left: 25%;
+  width: 10px;
+  height: 10px;
+
+  animation-delay: 2s;
+  animation-duration: 40s;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.bubble li:nth-child(10) {
+  left: 90%;
+  width: 160px;
+  height: 160px;
+
+  animation-delay: 11s;
+}
+
+@keyframes square {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-1300px) rotate(600deg);
   }
 }

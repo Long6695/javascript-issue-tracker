@@ -15,32 +15,56 @@
     <title>Login Dashboard</title>
   </head>
   <body>
-    <div class="status-login">
-      <p class="status">User Registration Successfully! Please Login</p>
-    </div>
     <div class="container">
       <div class="register">
         <div class="header">
-          <a href="../welcome/welcome.html"
-            ><i class="fas fa-chevron-left"></i
-          ></a>
-          <h1>Log In</h1>
+          <a class="icon" href="../welcome/welcome.html"
+            ><i class="fas fa-chevron-left"> </i>
+          </a>
+          <a href="../welcome/welcome.html" class="login">Log In</a>
         </div>
-        <span class="line"></span>
-        <form id="form">
-          <label for="email">Email</label>
-          <input type="email" id="email" />
-          <label id="error-mess" class="des-error" value="Email"></label>
-          <label for="password">Password</label>
-          <input type="password" id="password" />
-          <label id="error-mess" class="des-error" value="PassWord"></label>
-          <input type="submit" value="Login" />
+
+        <form class="form" id="form">
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-input"
+              id="email"
+              placeholder="Email"
+              name="email"
+            />
+            <label id="message" class="message"></label>
+          </div>
+          <div class="form-group">
+            <input
+              class="form-input"
+              type="password"
+              id="password"
+              placeholder="Password"
+              name="password"
+            />
+            <label id="message" class="message"></label>
+          </div>
+          <input class="submit" type="submit" value="Login" />
         </form>
+
         <div class="loading">
           <i class="fas fa-spinner"></i>
         </div>
       </div>
     </div>
-    <script src="./login.js"></script>
+    <ul class="bubble">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <script src="./validateLogin.js"></script>
   </body>
 </html>
