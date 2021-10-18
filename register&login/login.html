@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./register-login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Login Dashboard</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="register">
+        <div class="header">
+          <a class="icon" href="../welcome/welcome.html"
+            ><i class="fas fa-chevron-left"> </i>
+          </a>
+          <a href="../welcome/welcome.html" class="login">Log In</a>
+        </div>
+
+        <form class="form" id="form">
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-input"
+              id="email"
+              placeholder="Email"
+              name="email"
+            />
+            <label id="message" class="message"></label>
+          </div>
+          <div class="form-group">
+            <input
+              class="form-input"
+              type="password"
+              id="password"
+              placeholder="Password"
+              name="password"
+            />
+            <label id="message" class="message"></label>
+          </div>
+          <input class="submit" type="submit" value="Login" />
+        </form>
+
+        <div class="loading">
+          <i class="fas fa-spinner"></i>
+        </div>
+      </div>
+    </div>
+    <ul class="bubble">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <script src="./validateLogin.js"></script>
+  </body>
+</html>

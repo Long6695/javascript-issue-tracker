@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./register-login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Register Dashboard</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="register">
+        <div class="header">
+          <a class="icon" href="../welcome/welcome.html"
+            ><i class="fas fa-chevron-left"></i
+          ></a>
+          <a class="login" href="../welcome/welcome.html">Register</a>
+        </div>
+        <span class="line"></span>
+        <form class="form" id="form">
+          <div class="form-group">
+            <input
+              rules="required"
+              name="firstname"
+              class="form-input"
+              type="text"
+              id="firstname"
+              placeholder="First Name"
+            />
+            <label id="message" class="message"></label>
+          </div>
+          <div class="form-group">
+            <input
+              rules="required"
+              name="lastname"
+              class="form-input"
+              type="text"
+              id="lastname"
+              placeholder="Last Name"
+            />
+            <label id="message" class="message"></label>
+          </div>
+          <div class="form-group">
+            <input
+              rules="required/email"
+              name="email"
+              class="form-input"
+              type="email"
+              id="email"
+              placeholder="Email"
+            />
+            <label id="message" class="message"></label>
+          </div>
+          <div class="form-group">
+            <input
+              rules="required/min:6/max:16"
+              name="password"
+              class="form-input"
+              type="password"
+              id="password"
+              placeholder="Password"
+            />
+            <label id="message" class="message"></label>
+          </div>
+
+          <div class="form-group">
+            <input
+              rules="required/match"
+              name="password2"
+              class="form-input"
+              type="password"
+              id="password2"
+              placeholder="Confirm Password"
+            />
+            <label id="message" class="message"></label>
+          </div>
+          <input class="submit" type="submit" value="Register" />
+        </form>
+        <div class="loading">
+          <i class="fas fa-spinner"></i>
+        </div>
+      </div>
+      <ul class="bubble">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <script src="./validateRegister.js"></script>
+  </body>
+</html>

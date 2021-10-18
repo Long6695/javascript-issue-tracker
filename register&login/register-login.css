@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  color: #000;
+  font-size: 1.6rem;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  background: #50a3a2;
+  overflow: hidden;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 2.7rem;
+}
+.container {
+  width: 400px;
+  height: 630px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  position: absolute;
+}
+
+.register {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.register .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 200px;
+  margin-bottom: 30px;
+  position: relative;
+  transition: 0.3s all ease-in-out;
+}
+.register .header:hover .icon {
+  position: absolute;
+  left: 0;
+  font-size: 16px;
+}
+
+.register .header:hover .login {
+  color: #53e3a6;
+}
+
+.register .icon {
+  display: block;
+  font-size: 16px;
+}
+.register .login {
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 30px;
+}
+
+.register form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  z-index: 2;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+}
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-group .form-input {
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid rgb(216, 216, 216);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+  margin: 10px;
+}
+.form-group .form-input::placeholder {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.form-group .form-input:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.form-group .form-input:focus {
+  width: 120%;
+  background: white;
+  color: #53e3a6;
+}
+.form-group .message {
+  font-size: 14px;
+  text-align: left;
+  display: none;
+}
+.form-group.success .form-input {
+  border: 1px solid rgb(7, 69, 241);
+}
+
+.form-group.error .form-input {
+  border: 1px solid red;
+}
+
+.form-group.success .message {
+  color: rgb(7, 69, 241);
+  display: block;
+}
+
+.form-group.error .message {
+  display: block;
+  color: red;
+}
+
+.form .submit {
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  color: #53e3a6;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.loading {
+  margin-top: 20px;
+}
+.loading i {
+  animation: spin 1s ease-in infinite;
+  transform: rotate(0deg);
+  visibility: hidden;
+}
+
+.loading.active i {
+  visibility: visible;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.status-login.active {
+  background-color: #09dbd8;
+  width: 400px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 20px;
+  animation: status 4s ease-in-out forwards;
+  position: absolute;
+  top: 20%;
+}
+
+.status-login.active .status {
+  color: #0922af;
+}
+
+@keyframes status {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.bubble li {
+  position: absolute;
+  list-style: none;
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  bottom: -300px;
+  animation: square 20s infinite;
+  transition-timing-function: linear;
+}
+
+.bubble li:nth-child(1) {
+  left: 10%;
+}
+
+.bubble li:nth-child(2) {
+  left: 20%;
+
+  width: 80px;
+  height: 80px;
+
+  animation-delay: 2s;
+  animation-duration: 17s;
+}
+
+.bubble li:nth-child(3) {
+  left: 25%;
+  animation-delay: 4s;
+}
+
+.bubble li:nth-child(4) {
+  left: 40%;
+  width: 60px;
+  height: 60px;
+
+  animation-duration: 22s;
+
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.bubble li:nth-child(5) {
+  left: 70%;
+}
+
+.bubble li:nth-child(6) {
+  left: 80%;
+  width: 120px;
+  height: 120px;
+
+  animation-delay: 3s;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.bubble li:nth-child(7) {
+  left: 32%;
+  width: 160px;
+  height: 160px;
+
+  animation-delay: 7s;
+}
+
+.bubble li:nth-child(8) {
+  left: 55%;
+  width: 20px;
+  height: 20px;
+
+  animation-delay: 15s;
+  animation-duration: 40s;
+}
+
+.bubble li:nth-child(9) {
+  left: 25%;
+  width: 10px;
+  height: 10px;
+
+  animation-delay: 2s;
+  animation-duration: 40s;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.bubble li:nth-child(10) {
+  left: 90%;
+  width: 160px;
+  height: 160px;
+
+  animation-delay: 11s;
+}
+
+@keyframes square {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-1300px) rotate(600deg);
+  }
+}

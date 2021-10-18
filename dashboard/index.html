@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Issue Tracker</title>
+  </head>
+  <body>
+    <div class="delete">
+      <p class="delete-status">Delete Successful</p>
+    </div>
+    <div class="container">
+      <div class="status-login">
+        <p class="status">Log In Successful</p>
+      </div>
+      <div class="add">
+        <p class="add-status">Add Successful</p>
+      </div>
+      <div class="logout">
+        <a id="logout-btn" class="logout-btn">Logout</a>
+      </div>
+      <div class="add-task">
+        <h1 class="main-title">Issue Tracker</h1>
+        <form id="form" class="form">
+          <label for="description">Description</label>
+          <input
+            id="description"
+            type="text"
+            placeholder="Describe the issue ..."
+            class="success"
+          />
+          <label id="error-mess" class="des-error"></label>
+          <label>Severity</label>
+          <select id="severity">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <input type="submit" value="Add" />
+        </form>
+      </div>
+
+      <div class="option-tracker">
+        <div class="header-tracker">
+          <h2>List Tracker</h2>
+          <input
+            id="search-tracker"
+            type="type"
+            placeholder="Search by description"
+          />
+        </div>
+        <div class="filter-tracker">
+          <label>Filter:</label>
+          <div class="tracker-tags">
+            <button href="#" id="all" class="tag all-tag">All</button>
+            <button href="#" id="open" class="tag open-tag">Open</button>
+            <button href="#" id="close" class="tag close-tag">Close</button>
+          </div>
+        </div>
+        <div class="order-tracker">
+          <label>Order By:</label>
+          <select id="order-by" class="select-order">
+            <option value="asc" id="asc">ASC</option>
+            <option value="desc" id="desc">DESC</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="wrapper-list"></div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
