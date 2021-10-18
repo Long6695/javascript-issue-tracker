@@ -412,7 +412,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
   border-radius: 20px;
   animation: add 3s ease-in-out forwards;
   visibility: visible;
@@ -421,6 +420,7 @@ a {
   top: 25%;
   transform: translate(-50%, -50%);
   z-index: 99;
+
 }
 
 .add.active .add-status {
