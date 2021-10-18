@@ -419,6 +419,8 @@ a {
   left: 50%;
   top: 25%;
   transform: translate(-50%, -50%);
+  z-index: 99;
+
 }
 
 .add.active .add-status {
