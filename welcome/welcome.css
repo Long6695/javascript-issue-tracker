@@ -8,33 +8,33 @@ html {
   font-size: 62.5%;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
   color: #000;
-  font-size: 1.6rem;
   margin: 0 auto;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: #50a3a2;
-  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
 }
-
+.container {
+  max-width: 650px;
+  position: absolute;
+  z-index: 2;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 a {
   text-decoration: none;
-}
-
-.container {
-  width: 400px;
-  height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 3rem;
-  border-radius: 1rem;
-  position: relative;
-  z-index: 2;
 }
 
 .welcome {
@@ -54,13 +54,15 @@ a {
 
 .welcome p {
   line-height: 1.4;
-  color: #333;
+  color: rgb(94, 94, 94);
+  font-size: 2rem;
 }
 .welcome .option {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  margin-top: 5rem;
 }
 
 .option a {
@@ -101,8 +103,8 @@ a {
   width: 40px;
   height: 40px;
   background-color: rgba(255, 255, 255, 0.5);
-  bottom: -300px;
-  animation: square 15s infinite;
+  bottom: -500px;
+  animation: square 20s infinite;
   transition-timing-function: linear;
 }
 
@@ -140,9 +142,9 @@ a {
 }
 
 .bubble li:nth-child(6) {
-  left: 80%;
-  width: 120px;
-  height: 120px;
+  left: 50%;
+  width: 70px;
+  height: 70px;
 
   animation-delay: 3s;
   background-color: rgba(255, 255, 255, 0.9);
@@ -150,8 +152,8 @@ a {
 
 .bubble li:nth-child(7) {
   left: 32%;
-  width: 160px;
-  height: 160px;
+  width: 100px;
+  height: 100px;
 
   animation-delay: 7s;
 }
@@ -176,9 +178,9 @@ a {
 }
 
 .bubble li:nth-child(10) {
-  left: 90%;
-  width: 160px;
-  height: 160px;
+  left: 50%;
+  width: 90px;
+  height: 90px;
 
   animation-delay: 11s;
 }
@@ -188,6 +190,6 @@ a {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-1300px) rotate(600deg);
+    transform: translateY(-1500px) rotate(600deg);
   }
 }

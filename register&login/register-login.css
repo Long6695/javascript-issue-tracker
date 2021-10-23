@@ -7,38 +7,25 @@
 html {
   font-size: 62.5%;
 }
-
 body {
   font-family: 'Ubuntu', sans-serif;
   color: #000;
-  font-size: 1.6rem;
   margin: 0 auto;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100vw;
-  position: relative;
   background: #50a3a2;
+  position: relative;
   overflow: hidden;
+  padding-top: 7rem;
+  height: 100vh;
+  width: 100vw;
+}
+ul {
+  padding: 0;
+  margin: 0;
 }
 a {
   text-decoration: none;
   color: #fff;
   font-size: 2.7rem;
-}
-.container {
-  width: 400px;
-  height: 630px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 2rem 3rem;
-  border-radius: 1rem;
-  position: absolute;
 }
 
 .register {
@@ -47,7 +34,6 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
   z-index: 2;
 }
 
@@ -60,6 +46,7 @@ a {
   margin-bottom: 30px;
   position: relative;
   transition: 0.3s all ease-in-out;
+  z-index: 2;
 }
 .register .header:hover .icon {
   position: absolute;
@@ -84,7 +71,7 @@ a {
 }
 
 .register form {
-  width: 100%;
+  max-width: 600px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -93,14 +80,7 @@ a {
   align-items: center;
   z-index: 2;
 }
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 600px;
-  width: 100%;
-}
+
 .form-group {
   width: 100%;
   display: flex;
@@ -229,7 +209,7 @@ a {
   width: 40px;
   height: 40px;
   background-color: rgba(255, 255, 255, 0.5);
-  bottom: -300px;
+  bottom: -500px;
   animation: square 20s infinite;
   transition-timing-function: linear;
 }
@@ -268,9 +248,9 @@ a {
 }
 
 .bubble li:nth-child(6) {
-  left: 80%;
-  width: 120px;
-  height: 120px;
+  left: 50%;
+  width: 70px;
+  height: 70px;
 
   animation-delay: 3s;
   background-color: rgba(255, 255, 255, 0.9);
@@ -278,8 +258,8 @@ a {
 
 .bubble li:nth-child(7) {
   left: 32%;
-  width: 160px;
-  height: 160px;
+  width: 100px;
+  height: 100px;
 
   animation-delay: 7s;
 }
@@ -304,9 +284,9 @@ a {
 }
 
 .bubble li:nth-child(10) {
-  left: 90%;
-  width: 160px;
-  height: 160px;
+  left: 50%;
+  width: 90px;
+  height: 90px;
 
   animation-delay: 11s;
 }
@@ -316,6 +296,6 @@ a {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-1300px) rotate(600deg);
+    transform: translateY(-1500px) rotate(600deg);
   }
 }
